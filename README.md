@@ -9,25 +9,14 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-
 ## Introduction
 
-Income inequality is a pressing global issue, and this project examines how it differs between developed and developing countries. In particular, I focus on the **Gini index** as a measure of inequality and investigate its relationship with **GDP per capita** (economic prosperity) and **education levels**. As an engineering student from Vietnam (a developing country), I have a personal interest in this topic. I’ve witnessed how rapid economic growth in Vietnam comes with concerns about fair wealth distribution. By comparing data across nations, I hope to understand whether higher national income and educational progress correspond to lower inequality, and what the gap looks like between the developed and developing worlds.
+Income inequality is a pressing global issue, and this project examines how it differs between developed and developing countries. In particular, I focus on the **Gini index** as a measure of inequality and investigate its relationship with **GDP per capita** (economic prosperity) and **education levels**. I am interested in this topic as an engineering student from Vietnam (a developing country). I’ve witnessed how rapid economic growth in Vietnam comes with concerns about fair wealth distribution. By comparing data across nations, I hope to understand whether higher national income and educational progress correspond to lower inequality and what the gap between the developed and developing worlds looks like.
 
 ## Data and Methodology
 
 First, I load the necessary R packages. The `{WDI}` package will allow access to the World Bank data, and `{tidyverse}` is used for data manipulation and plotting.
+ {WDI} package on CRAN (The Comprehensive R Archive Network):https://cran.r-project.org/package=WDI
 
 ```{r libraries, message=FALSE}
 library(WDI)
@@ -77,7 +66,7 @@ In this simulated dataset:
 - **Gini_index:** is a hypothetical Gini coefficient (with higher values = more inequality).
 - **Education:** represents an education metric (here we use “average years of schooling” as an example).
 
-The data is now in a tidy format, with each row representing a country. For the purposes of illustration, the values reflect general trends (developed countries have much higher GDP per capita and somewhat lower Gini values compared to the developing countries).
+The data is now in a tidy format, with each row representing a country. For illustration, the values reflect general trends (developed countries have much higher GDP per capita and somewhat lower Gini values compared to the developing countries).
 
 ### Data Wrangling Steps
 
@@ -223,7 +212,7 @@ The output above is the summary of a linear model where **Gini_index** is the re
 
 - **Intercept:** This corresponds to the expected Gini index when GDP per capita is zero and for the baseline category. (Here, by our factor coding, the baseline is “Developing” countries.) The intercept is not very interpretable in a practical sense because no country has zero GDP per capita, but it gives a starting point for the model.
 - **GDP_per_capita coefficient:** This value indicates how much the Gini index is expected to change with a one-unit (\$1) increase in GDP per capita, holding the country category constant. In our sample, this coefficient is very small in magnitude (since \$1 is a tiny change relative to typical GDP levels) and not statistically significant. If we scale this to, say, \$1000 increments, we might interpret it as the effect per \$1000 of GDP. The sign of the coefficient (which might be slightly negative or around zero in the output) would tell us the direction of the relationship. We would expect, in a larger real dataset, to see a **negative** coefficient here (indicating that higher GDP per capita leads to a lower Gini index, i.e., less inequality).
-- **category (Developed) coefficient:** This represents the difference in Gini index between Developed and Developing countries, *after controlling for GDP per capita*. In the summary output, you’ll see a coefficient for `categoryDeveloped` (if “Developing” is the baseline). A **negative** value for this coefficient would imply that, at a given level of GDP per capita, developed countries have a lower Gini index than developing countries. In our simulation, the coefficient is negative (suggesting developed countries tend to have lower inequality than developing ones even at similar income levels), although with only 10 data points the statistical significance is marginal. In a real-world scenario with many countries, we might find this effect to be significant if there are structural differences affecting inequality beyond just GDP.
+- **category (Developed) coefficient:** This represents the difference in Gini index between Developed and Developing countries, *after controlling for GDP per capita*. In the summary output, you’ll see a coefficient for `categoryDeveloped` (if “Developing” is the baseline). A **negative** value for this coefficient would imply that, at a given level of GDP per capita, developed countries have a lower Gini index than developing countries. In our simulation, the coefficient is negative (suggesting developed countries tend to have lower inequality than developing ones even at similar income levels), although with only 10 data points, the statistical significance is marginal. In a real-world scenario with many countries, we might find this effect to be significant if there are structural differences affecting inequality beyond just GDP.
 - **R-squared and p-values:** The model output also provides an R-squared (how much variance in inequality is explained by our two predictors) and p-values for each coefficient. With a comprehensive dataset, we could assess how well GDP and development status together explain inequality differences. We expect a decent portion of variability to be explained by these factors, though certainly not all (since many other factors can influence inequality).
 
 *Interpretation:* The regression analysis in summary helps quantify our earlier observations. It can tell us, for example, *“How much lower is the Gini index expected to be if a country is developed versus developing, assuming they had the same GDP per capita?”* and *“How strongly (and in what direction) is GDP per capita itself associated with inequality, after accounting for a country’s development category?”*. In our illustrative data, the model suggests that being a developed country is associated with a substantially lower Gini index compared to a developing country with similar GDP. The GDP per capita effect was not very pronounced here due to the small sample and the fact that GDP and category are somewhat correlated (developed countries all have high GDP in our data). In a full analysis with more data, we might see a clearer trend where higher GDP per capita contributes to lower inequality.
