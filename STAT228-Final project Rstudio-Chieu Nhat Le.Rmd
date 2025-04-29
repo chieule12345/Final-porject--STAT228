@@ -8,21 +8,9 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-
 ## Introduction
 
-Income inequality is a pressing global issue, and this project examines how it differs between developed and developing countries. In particular, I focus on the **Gini index** as a measure of inequality and investigate its relationship with **GDP per capita** (economic prosperity) and **education levels**. As an engineering student from Vietnam (a developing country), I have a personal interest in this topic. I’ve witnessed how rapid economic growth in Vietnam comes with concerns about fair wealth distribution. By comparing data across nations, I hope to understand whether higher national income and educational progress correspond to lower inequality, and what the gap looks like between the developed and developing worlds.
+Income inequality is a pressing global issue, and this project examines how it differs between developed and developing countries. In particular, I focus on the **Gini index** as a measure of inequality and investigate its relationship with **GDP per capita** (economic prosperity) and **education levels**. As an engineering student from Vietnam (a developing country), I am interested in this topic. I’ve witnessed how rapid economic growth in Vietnam comes with concerns about fair wealth distribution. By comparing data across nations, I hope to understand whether higher national income and educational progress correspond to lower inequality and what the gap between the developed and developing worlds looks like.
 
 ## Data and Methodology
 
@@ -76,7 +64,7 @@ In this simulated dataset:
 - **Gini_index:** is a hypothetical Gini coefficient (with higher values = more inequality).
 - **Education:** represents an education metric (here we use “average years of schooling” as an example).
 
-The data is now in a tidy format, with each row representing a country. For the purposes of illustration, the values reflect general trends (developed countries have much higher GDP per capita and somewhat lower Gini values compared to the developing countries).
+The data is now in a tidy format, with each row representing a country. For illustration, the values reflect general trends (developed countries have much higher GDP per capita and somewhat lower Gini values compared to the developing countries).
 
 ### Data Wrangling Steps
 
